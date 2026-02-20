@@ -41,6 +41,21 @@ After setup, run `build.bat` to produce `dist\SW2024-05-2STEP.exe`:
 build.bat
 ```
 
+### Create a Release
+
+`release.bat` builds the `.exe`, tags the commit, and publishes a GitHub release
+with the executable attached — all in one step.
+
+Requirements:
+- `setup.bat` has been run
+- [GitHub CLI](https://cli.github.com) is installed and authenticated (`gh auth login`)
+
+```bat
+release.bat
+```
+
+You will be prompted for a version number (e.g. `1.0.0`).
+
 ### Run in Dev Mode
 
 ```bat
@@ -94,5 +109,6 @@ SW2024-05-2STEP/
 
 | Version | Date | Changes |
 |---|---|---|
+| 0.3.0 | 2026-02-20 | Add release.bat for one-step local GitHub release |
 | 0.2.0 | 2026-02-20 | Add standalone .exe build via PyInstaller, replace install.py with setup.bat |
 | 0.1.0 | 2026-02-20 | Initial release — CLI + GUI skeleton |
