@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "SW2024-05-2STEP"
+version = "0.1.0"
+description = "SolidWorks 2024 SP05 to STEP converter"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pywin32>=306",
+    "PyQt6>=6.6.0",
+]
+
+[project.scripts]
+sw2step = "src.__main__:main"
