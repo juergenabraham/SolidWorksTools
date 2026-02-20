@@ -17,7 +17,7 @@ No Python installation required.
 
 1. Download `SW2024-05-2STEP.exe` from the releases page.
 2. Double-click to launch the GUI.
-3. Select your `.sldprt` or `.sldasm` file and click **Convert to STEP**.
+3. Add one or more `.sldprt` / `.sldasm` files and click **Convert to STEP**.
 
 ## For Developers
 
@@ -64,9 +64,13 @@ You will be prompted for a version number (e.g. `1.0.0`).
 :: Launch GUI
 python -m src --gui
 
-:: Convert via CLI
+:: Convert single file
 python -m src path\to\file.sldprt
 python -m src path\to\file.sldprt -o C:\output\result.step
+
+:: Convert multiple files
+python -m src file1.sldprt file2.sldasm file3.sldprt
+python -m src file1.sldprt file2.sldasm -o C:\output\folder
 ```
 
 ## Dependencies
@@ -109,6 +113,7 @@ SW2024-05-2STEP/
 
 | Version | Date | Changes |
 |---|---|---|
+| 0.5.0 | 2026-02-20 | Batch conversion — multiple files via GUI list and CLI |
 | 0.4.0 | 2026-02-20 | Run SolidWorks headless (no SW window during conversion) |
 | 0.3.0 | 2026-02-20 | Add release.bat for one-step local GitHub release |
 | 0.2.0 | 2026-02-20 | Add standalone .exe build via PyInstaller, replace install.py with setup.bat |
