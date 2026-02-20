@@ -109,6 +109,7 @@ SW2024-05-2STEP/
 
 | Version | Date | Changes |
 |---|---|---|
+| 0.4.0 | 2026-02-20 | Run SolidWorks headless (no SW window during conversion) |
 | 0.3.0 | 2026-02-20 | Add release.bat for one-step local GitHub release |
 | 0.2.0 | 2026-02-20 | Add standalone .exe build via PyInstaller, replace install.py with setup.bat |
 | 0.1.0 | 2026-02-20 | Initial release — CLI + GUI skeleton |

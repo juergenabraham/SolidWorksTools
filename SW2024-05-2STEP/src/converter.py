@@ -16,14 +16,15 @@ DOC_TYPES = {
 
 
 def connect_solidworks():
-    """Attach to a running SolidWorks instance, or start a new one."""
+    """Attach to a running SolidWorks instance, or start a new headless one."""
     try:
         app = win32com.client.GetActiveObject("SldWorks.Application")
         print("[INFO] Connected to existing SolidWorks instance.")
     except Exception:
-        print("[INFO] Starting new SolidWorks instance...")
+        print("[INFO] Starting SolidWorks in background...")
         app = win32com.client.Dispatch("SldWorks.Application")
-        app.Visible = True
+        app.Visible = False       # no SW window
+        app.UserControl = False   # automation mode — SW exits when we're done
     return app
 
 
