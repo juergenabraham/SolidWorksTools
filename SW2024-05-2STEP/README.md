@@ -9,7 +9,50 @@ using the SolidWorks COM API.
 |---|---|
 | Operating System | Windows |
 | SolidWorks | 2024 SP05 |
-| Python | >= 3.10 |
+| Python | >= 3.10 (dev/build only) |
+
+## For End Users — Standalone Executable
+
+No Python installation required.
+
+1. Download `SW2024-05-2STEP.exe` from the releases page.
+2. Double-click to launch the GUI.
+3. Select your `.sldprt` or `.sldasm` file and click **Convert to STEP**.
+
+## For Developers
+
+### Setup
+
+Run `setup.bat` once. It will:
+
+- Install Python 3.11 automatically via `winget` if not already present.
+- Create a virtual environment (`.venv`).
+- Install all dependencies.
+
+```bat
+setup.bat
+```
+
+### Build Standalone Executable
+
+After setup, run `build.bat` to produce `dist\SW2024-05-2STEP.exe`:
+
+```bat
+build.bat
+```
+
+### Run in Dev Mode
+
+```bat
+.venv\Scripts\activate
+
+:: Launch GUI
+python -m src --gui
+
+:: Convert via CLI
+python -m src path\to\file.sldprt
+python -m src path\to\file.sldprt -o C:\output\result.step
+```
 
 ## Dependencies
 
@@ -17,68 +60,39 @@ using the SolidWorks COM API.
 |---|---|
 | `pywin32` | SolidWorks COM API access |
 | `PyQt6` | Graphical user interface |
-
-## Setup
-
-Run the installer once to create a virtual environment and install all dependencies:
-
-```bat
-python install.py
-```
-
-Then activate the environment:
-
-```bat
-.venv\Scripts\activate
-```
-
-## Usage
-
-### GUI
-
-```bat
-python -m src --gui
-```
-
-Or simply run without arguments:
-
-```bat
-python -m src
-```
-
-### CLI
-
-```bat
-python -m src path\to\file.sldprt
-python -m src path\to\file.sldasm -o C:\output\result.step
-```
+| `pyinstaller` | Standalone .exe build (dev only) |
 
 ## Project Structure
 
 ```
 SW2024-05-2STEP/
-  install.py        Setup script (creates venv + installs deps)
-  pyproject.toml    Package metadata
-  requirements.txt  Python dependencies
-  README.md         This file
-  doc.pdf           Generated documentation
+  setup.bat             Developer setup (Python + venv + deps)
+  build.bat             Build standalone .exe via PyInstaller
+  sw2step.spec          PyInstaller build configuration
+  pyproject.toml        Package metadata
+  requirements.txt      Runtime dependencies
+  requirements-dev.txt  Development dependencies (includes PyInstaller)
+  README.md             This file
+  doc.pdf               Generated documentation
   src/
     __init__.py
-    __main__.py     Entry point (CLI + GUI launcher)
-    converter.py    SolidWorks COM API conversion logic
-    gui.py          PyQt6 graphical interface
+    __main__.py         Entry point (CLI + GUI launcher)
+    converter.py        SolidWorks COM API conversion logic
+    gui.py              PyQt6 graphical interface
 ```
 
 ## Notes
 
 - SolidWorks must be **installed and licensed** on the machine.
-- The converter will attach to a running SolidWorks instance if one is open,
-  or start a new one automatically.
+- The converter attaches to a running SolidWorks instance if one is open,
+  or starts a new one automatically.
 - Supported input formats: `.sldprt` (part), `.sldasm` (assembly).
 - Output is always a `.step` file (ISO 10303).
+- The `dist/` and `build/` folders are excluded from version control.
 
 ## Version History
 
 | Version | Date | Changes |
 |---|---|---|
+| 0.2.0 | 2026-02-20 | Add standalone .exe build via PyInstaller, replace install.py with setup.bat |
 | 0.1.0 | 2026-02-20 | Initial release — CLI + GUI skeleton |
